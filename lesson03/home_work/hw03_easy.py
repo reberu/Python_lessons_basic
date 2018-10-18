@@ -5,12 +5,26 @@
 # Для решения задачи не используйте встроенные функции и функции из модуля math.
 
 def my_round(number, ndigits):
-    pass
+    integer, fractional = map(int, str(number).split(".", 1))
+    lst = list(str(fractional))
+    lst = list(map(int, lst))
+    if len(lst) > ndigits: round()
+        count = len(lst) - 1
+        while count > 0:
+            if lst[count] >= 5:
+                lst[count - 1] = lst[count - 1] + 1
+                lst[count] = 0
+            else:
+                lst[count - 1] = lst[count - 1] - 1
+            count -= 1
+    fractional = ''.join(str(e) for e in lst)
+    fractional = fractional[0:ndigits+1]
+    result = str(integer) + "." + fractional
+    return result
 
-
-print(my_round(2.1234567, 5))
-print(my_round(2.1999967, 5))
-print(my_round(2.9999967, 5))
+print(my_round(2.1234567, 3))
+print(my_round(2.1999967, 3))
+print(my_round(2.9999967, 3))
 
 
 # Задание-2:
