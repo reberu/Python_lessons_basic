@@ -57,3 +57,68 @@
 модуль random: http://docs.python.org/3/library/random.html
 
 """
+import random
+def generator():
+    arr = []
+    for n in range(3):
+        line = []
+        while len(line) <= 4:
+            num = random.randint(1, 90)
+            if num not in line:
+                line.append(num)
+        for i in range(4):
+            line.append('__')
+        random.shuffle(line)
+        arr.append(line)
+    return arr
+
+def output(array):
+    for row in array:
+        print(' '.join([str(elem) for elem in row]))
+    print('--------------------------')
+
+player = generator()
+computer = generator()
+barrels = [0]
+num = 0
+count = 90
+flag = False
+
+while count > 0:
+    print(barrels)
+    count -= 1
+    num = random.randint(1, 90)
+    while True:
+        num = random.randint(1, 90)
+        if num not in barrels:
+            barrels.append(num)
+            break
+    print('Новый бочонок: ', num, ' (осталось ходов: ', count, ')')
+    print('------ Ваша карточка -----')
+    output(player)
+    print('-- Карточка компьютера ---')
+    output(computer)
+    answer = input('Зачеркнуть цифру? (y/n)')
+    if answer == 'y':
+
+        for row in player:
+            i = j = 0
+            for elem in row:
+                if elem == num:
+                    player[i][j] = '-'
+                i += 1
+            j += 1
+    elif answer == 'n':
+        print('Продолжаем')
+    else:
+        break
+    if flag:
+        break
+    for row in computer:
+        i = j = 0
+        for elem in row:
+            if elem == num:
+                print(num)
+                computer[i][j] = '-'
+                i += 1
+            j += 1
